@@ -13,7 +13,7 @@ struct Trie {
     }
 };
 
-// insertion in trie through recursion (T.C => O(length of string))
+// insertion in trie through recursion (T.C => O(length of word))
 void insertion(Trie* root, string word) {
     // base case
     if(word.length() == 0) {
@@ -41,7 +41,7 @@ void insertion(Trie* root, string word) {
     insertion(child, word.substr(1));
 }
 
-// performing searching in trie (T.C => O(length of string))
+// performing searching in trie (T.C => O(length of word))
 bool search_word(Trie* root, string word) {
     // base case
     if(word.length() == 0) {
@@ -62,7 +62,7 @@ bool search_word(Trie* root, string word) {
     return final_ans;
 }
 
-// deletion in trie also with recursion (T.C => O(length of string))
+// deletion in trie also with recursion (T.C => O(length of word))
 void deletion(Trie* root, string word) {
     // base case
     if(word.length() == 0) {
@@ -87,12 +87,13 @@ int main() {
 
     // creation of root node
     Trie* root = new Trie('$');
-    insertion(root, "luffy");
-    insertion(root, "zoro");
-    insertion(root, "sanji");
-    insertion(root, "robin");
-    insertion(root, "nami");
-    insertion(root, "jinbei");
+    insertion(root, "ichibe hyosube");
+    insertion(root, "kenpachi zaraki");
+    insertion(root, "unohana retsu");
+    insertion(root, "kyoraku shunsui");
+    insertion(root, "hirako shinji");
+    insertion(root, "kuchiki byakuya");
+    insertion(root, "urahara kisuke");
 
     // searching words/string in trie
     string str;
