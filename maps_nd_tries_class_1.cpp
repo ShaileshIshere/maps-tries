@@ -61,63 +61,63 @@ int main() {
 
 /*basic wisdom about map STLs*/
     // creation of map
-    // map<string, int> mp;
-    // // insertion in map
-    // mp["yamamoto"] = 1;
+    map<string, int> mp;
+    // insertion in map
+    mp["yamamoto"] = 1;
 
-    // /*as we're insertin values in pairs inside
-    // the map so here are some of the common 
-    // methods to inserti values in pairs*/
-    // // method 1:
-    // pair<string, int> priest = make_pair("ichibe hyosube", 0);
-    // // method 2:
-    // pair<string, int> cherry_blosom("byakuya kuchicki", 10);
-    // // method 3:
-    // pair<string, int> she_kenpachi;
-    // she_kenpachi.first = "retsu unohana";
-    // she_kenpachi.second = 4;
-    // // method 4:
-    // pair<string, int> two_blades({"shunsui kyoraku", 8});
+    /*as we're insertin values in pairs inside
+    the map so here are some of the common 
+    methods to inserti values in pairs*/
+    // method 1:
+    pair<string, int> priest = make_pair("ichibe hyosube", 0);
+    // method 2:
+    pair<string, int> cherry_blosom("byakuya kuchicki", 10);
+    // method 3:
+    pair<string, int> she_kenpachi;
+    she_kenpachi.first = "retsu unohana";
+    she_kenpachi.second = 4;
+    // method 4:
+    pair<string, int> two_blades({"shunsui kyoraku", 8});
 
-    // // insert all these pairs in map => [mp]
-    // mp.insert(priest);
-    // mp.insert(cherry_blosom);
-    // mp.insert(she_kenpachi);
-    // mp.insert(two_blades);
+    // insert all these pairs in map => [mp]
+    mp.insert(priest);
+    mp.insert(cherry_blosom);
+    mp.insert(she_kenpachi);
+    mp.insert(two_blades);
 
-    // // checking the size of the map we created
-    // cout << "the size of map : " << mp.size() << endl;
+    // checking the size of the map we created
+    cout << "the size of map : " << mp.size() << endl;
 
-    // // accessing the member function that are stored in map
-    // cout << "byakuya kuchicki is the captain of squad : " << mp.at("byakuya kuchicki") << endl;
-    // cout << "yamamoto is the captain of squad : " << mp["yamamoto"] << endl;
+    // accessing the member function that are stored in map
+    cout << "byakuya kuchicki is the captain of squad : " << mp.at("byakuya kuchicki") << endl;
+    cout << "yamamoto is the captain of squad : " << mp["yamamoto"] << endl;
 
-    // // searching for values in map
-    // // method 1:
-    // /*if the provided value here is present in the map then the
-    // output would return [1], else if the provided value isn't present
-    // in the entire map then the output should be [0]*/
-    // cout << mp.count("ichibe hyosube") << endl;
-    // // method 2:
-    // /*here in this method we're checking the value is present or not
-    // int the map through [iterator] if the value is presented in the 
-    // map then the iterator is being stucked at the place where the 
-    // desired value should be situated, otherwise if the provide value
-    // isn't presented in the map so the iterator is pointing towards the
-    // end of the entire map, that's why we created a condition where if the
-    // desired value isn't equals to it's end position then the value is found,
-    // other wise the value isn't foundable so else case should apply*/
-    // if(mp.find("kenpachi zaraki") != mp.end())
-    //     cout << "found the lost captain" << endl;
-    // else 
-    //     cout << "the lost captain isn't found yet" << endl;
+    // searching for values in map
+    // method 1:
+    /*if the provided value here is present in the map then the
+    output would return [1], else if the provided value isn't present
+    in the entire map then the output should be [0]*/
+    cout << mp.count("ichibe hyosube") << endl;
+    // method 2:
+    /*here in this method we're checking the value is present or not
+    int the map through [iterator] if the value is presented in the 
+    map then the iterator is being stucked at the place where the 
+    desired value should be situated, otherwise if the provide value
+    isn't presented in the map so the iterator is pointing towards the
+    end of the entire map, that's why we created a condition where if the
+    desired value isn't equals to it's end position then the value is found,
+    other wise the value isn't foundable so else case should apply*/
+    if(mp.find("kenpachi zaraki") != mp.end())
+        cout << "found the lost captain" << endl;
+    else 
+        cout << "the lost captain isn't found yet" << endl;
 
-    // // important note about [] this thing
-    // /*if we check a value by [] this operator which isn't declared before in the map,
-    // and then check the size of map we see that there is an increase in the size of the
-    // map from before this is the power of [] this operator while checking unknown value*/
-    // cout << mp["kenpachi zaraki"] << endl; // {o/p} => {0}
-    // cout << "current size after checking the unknown value : " << mp.size() << endl;
+    // important note about [] this thing
+    /*if we check a value by [] this operator which isn't declared before in the map,
+    and then check the size of map we see that there is an increase in the size of the
+    map from before this is the power of [] this operator while checking unknown value*/
+    cout << mp["kenpachi zaraki"] << endl; // {o/p} => {0}
+    cout << "current size after checking the unknown value : " << mp.size() << endl;
 
     return 0;
 }
