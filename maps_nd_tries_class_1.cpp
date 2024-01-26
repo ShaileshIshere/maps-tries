@@ -37,27 +37,27 @@ bool is_cycle(Node* head) {
 
 int main() {
 
-    // unordered_map<char, int> mp;
-    // string str;
-    // cout << "enter any string here : ";
-    // getline(cin, str);
-    // count_frequency(mp, str);
-    // for(auto m:mp) {
-    //     cout << "[ ";
-    //     cout << m.first << " -> " << m.second;
-    //     cout << " ]";
-    // }
-    // cout << endl;
+    unordered_map<char, int> mp;
+    string str;
+    cout << "enter any string here : ";
+    getline(cin, str);
+    count_frequency(mp, str);
+    for(auto m:mp) {
+        cout << "[ ";
+        cout << m.first << " -> " << m.second;
+        cout << " ]";
+    }
+    cout << endl;
 
-    // Node* head = new Node(10);
-    // head->next = new Node(20);
-    // head->next->next = new Node(30);
-    // head->next->next->next = head;
-    // // 10 -> 20 -> 30 -> 10
-    // if(is_cycle(head))
-    //     cout << "it's a circular linked list" << endl;
-    // else 
-    //     cout << "no it's not a circular linked list" << endl;
+    Node* head = new Node(10);
+    head->next = new Node(20);
+    head->next->next = new Node(30);
+    head->next->next->next = head;
+    // 10 -> 20 -> 30 -> 10
+    if(is_cycle(head))
+        cout << "it's a circular linked list" << endl;
+    else 
+        cout << "no it's not a circular linked list" << endl;
 
 /*basic wisdom about map STLs*/
     // creation of map

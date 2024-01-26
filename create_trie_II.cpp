@@ -103,12 +103,12 @@ public:
 int main() {
 
     // method 1:
-    // WordDictionary obj;
-    // obj.addWord("ichigo");
-    // if(obj.search("ichigo"))
-    //     cout << "true" << endl;
-    // else
-    //     cout << "false" << endl;
+    WordDictionary obj;
+    obj.addWord("ichigo");
+    if(obj.search("ichigo"))
+        cout << "true" << endl;
+    else
+        cout << "false" << endl;
 
     // method 2:
     wordMaker inst;
