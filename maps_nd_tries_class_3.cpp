@@ -112,11 +112,19 @@ vector<vector<string>> get_suggestions(Trie* root, string word) {
         int index = lastChar - 'a';
         Trie* curr = prev->child[index];
         if(curr) {
+            /*in this string we're inserting the words based on
+            the prefix[word] size, that means jese jese loop 
+            aage bhadta rhega prefix ka size bhi bhadega to 
+            words jo push honge vo kam hote rhenge*/
             vector<string> upcommingAns;
+            /*here we're updating/enhancing the size of prefix*/
             wordHelper.push_back(lastChar);
             store_string(curr, upcommingAns, wordHelper);
             result.push_back(upcommingAns);
             // important
+            /*when we've inserted all the words from the first character 
+            form [word] we need to update out [prev] pointer in order
+            to search for more similar words with a larger prefix*/
             prev = curr;
         }
         else    
