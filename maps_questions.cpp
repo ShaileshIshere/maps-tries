@@ -168,80 +168,114 @@ int maxLen(vector<int> &A, int n) {
     return ans;
 }
 
+// top [k] frequent words
+struct comp {
+    bool operator()(const pair<int, string> &a, const pair<int, string> &b) {
+        return a.first == b.first ? a > b : a.first < b.first;
+    }
+};
+vector<string> top_K_freq(vector<string> &words, int k) {
+    unordered_map<string, int> mp;
+    for(auto word : words)
+        mp[word]++;
+    priority_queue<pair<int, string>, vector<pair<int, string>>, comp> pq;
+    for(auto it = mp.begin(); it != mp.end(); ++it)
+        pq.push({it->second, it->first});
+    vector<string> ans;
+    while(k--) {
+        ans.push_back(pq.top().second);
+        pq.pop();
+    }
+    return ans;
+}
+
 int main() {
 
-    // int n, m;
-    // cout << "enter the size of [a1](big) array and [a2](smol) array : ";
-    // cin >> n >> m;
-    // int a1[n], a2[m];
-    // for(int i=0; i<n; ++i)
-    //     cin >> a1[i];
-    // for(int i=0; i<m; ++i)
-    //     cin >> a2[i];
-    // cout << isSubset(a1, a2, n, m) << endl;
+    int n, m;
+    cout << "enter the size of [a1](big) array and [a2](smol) array : ";
+    cin >> n >> m;
+    int a1[n], a2[m];
+    for(int i=0; i<n; ++i)
+        cin >> a1[i];
+    for(int i=0; i<m; ++i)
+        cin >> a2[i];
+    cout << isSubset(a1, a2, n, m) << endl;
 
-    // Node *head1 = 0, *tail1 = 0, *head2 = 0, *tail2 = 0;
-    // int n, m;
-    // cout << "enter the size of [1st] & [2nd] linked list : ";
-    // cin >> n >> m;
-    // for(int i=0; i<n; ++i) {
-    //     int val;
-    //     cin >> val;
-    //     insert_Node(head1, tail1, val);    
-    // }
-    // for(int i=0; i<m; ++i) {
-    //     int val;
-    //     cin >> val;
-    //     insert_Node(head2, tail2, val);
-    // }
-    // cout << "here's your [1st] & [2nd] linked list :-" << endl;
-    // print_Node(head1);
-    // print_Node(head2);
-    // cout << "here's the union of both the given nodes :-" << endl;
-    // Node* result = makeUnion(head1, head2);
-    // print_Node(result);
+    Node *head1 = 0, *tail1 = 0, *head2 = 0, *tail2 = 0;
+    int n, m;
+    cout << "enter the size of [1st] & [2nd] linked list : ";
+    cin >> n >> m;
+    for(int i=0; i<n; ++i) {
+        int val;
+        cin >> val;
+        insert_Node(head1, tail1, val);    
+    }
+    for(int i=0; i<m; ++i) {
+        int val;
+        cin >> val;
+        insert_Node(head2, tail2, val);
+    }
+    cout << "here's your [1st] & [2nd] linked list :-" << endl;
+    print_Node(head1);
+    print_Node(head2);
+    cout << "here's the union of both the given nodes :-" << endl;
+    Node* result = makeUnion(head1, head2);
+    print_Node(result);
 
-    // Node *head1 = 0, *tail1 = 0, *head2 = 0, *tail2 = 0;
-    // int n, m;
-    // cout << "enter the size of [1st] & [2nd] linked list : ";
-    // cin >> n >> m;
-    // for(int i=0; i<n; ++i) {
-    //     int val;
-    //     cin >> val;
-    //     insert_Node(head1, tail1, val);    
-    // }
-    // for(int i=0; i<m; ++i) {
-    //     int val;
-    //     cin >> val;
-    //     insert_Node(head2, tail2, val);
-    // }
-    // cout << "here's your [1st] & [2nd] linked list :-" << endl;
-    // print_Node(head1);
-    // print_Node(head2);
-    // cout << "intersection of two linked list :-" << endl;
-    // Node* result = findIntersection(head1, head2);
-    // print_Node(result);
+    Node *head1 = 0, *tail1 = 0, *head2 = 0, *tail2 = 0;
+    int n, m;
+    cout << "enter the size of [1st] & [2nd] linked list : ";
+    cin >> n >> m;
+    for(int i=0; i<n; ++i) {
+        int val;
+        cin >> val;
+        insert_Node(head1, tail1, val);    
+    }
+    for(int i=0; i<m; ++i) {
+        int val;
+        cin >> val;
+        insert_Node(head2, tail2, val);
+    }
+    cout << "here's your [1st] & [2nd] linked list :-" << endl;
+    print_Node(head1);
+    print_Node(head2);
+    cout << "intersection of two linked list :-" << endl;
+    Node* result = findIntersection(head1, head2);
+    print_Node(result);
 
-    // long long n;
-    // cout << "enter the size of array : ";
-    // cin >> n;
-    // long long arr[n];
-    // for(int i=0; i<n; ++i)
-    //     cin >> arr[i];
-    // if(findPairs(arr, n))
-    //     cout << "the pair exists" << endl;
-    // else 
-    //     cout << "the pair doesn't exists" << endl;
+    long long n;
+    cout << "enter the size of array : ";
+    cin >> n;
+    long long arr[n];
+    for(int i=0; i<n; ++i)
+        cin >> arr[i];
+    if(findPairs(arr, n))
+        cout << "the pair exists" << endl;
+    else 
+        cout << "the pair doesn't exists" << endl;
 
-    // int n;
-    // cout << "enter the size of vector : ";
-    // cin >> n;
-    // vector<int> A(n);
-    // for(int i=0; i<n; ++i)
-    //     cin >> A[i];
-    // cout << "the length of largest subarray with [0] sum : " << maxLen(A, n) << endl;
+    int n;
+    cout << "enter the size of vector : ";
+    cin >> n;
+    vector<int> A(n);
+    for(int i=0; i<n; ++i)
+        cin >> A[i];
+    cout << "the length of largest subarray with [0] sum : " << maxLen(A, n) << endl;
 
-    // cout << "the maximum length of subarray that contains equal no. of 0's and 1's : " << maxLen(A, n) << endl;
+    cout << "the maximum length of subarray that contains equal no. of 0's and 1's : " << maxLen(A, n) << endl;
+
+    int n, k;
+    cout << "no. of words : ";
+    cin >> n;
+    vector<string> words(n);
+    for(int i=0; i<n; ++i)
+        cin >> words[i];
+    cout << "no. of frequent words : ";
+    cin >> k;
+    vector<string> result = top_K_freq(words, k);
+    cout << "here are your top " << k << " frequent words :-" << endl;
+    for(auto r:result)
+        cout << "[ " << r << " ]" << " " << endl;
 
     return 0;
 }
