@@ -165,6 +165,7 @@ vector<string> topKFrequent(vector<string>& words, int k) {
 }
 
 // camel-case matching
+// method 1: trie
 struct TrieNode{
     char data;
     bool isTerminal;
@@ -231,6 +232,32 @@ vector<bool> camelMatch(vector<string> &queries, string pattern) {
     for (string query : queries)
         ans.push_back(trie.search(query));
     return ans;
+}
+// method 2: string matching
+vector<bool> camelMatch(vector<string>& queries, string pattern) {
+    vector<bool> result;
+    for(int i = 0; i < queries.size(); ++i) {
+        int p = 0;
+        int j;
+        for(j = 0; j < queries[i].size(); ++j) {
+            if(isupper(queries[i][j])) {
+                if(p < pattern.size() && pattern[p] == queries[i][j])
+                    ++p;
+                else 
+                    break;
+            } else {
+                if(p < pattern.size() && islower(pattern[p]) && pattern[p] == queries[i][j])
+                    ++p;
+                else if(isupper(pattern[p]) || p == pattern.size())
+                    continue;
+            }
+        }
+        if(j != queries[i].size() || p < pattern.size())
+            result.push_back(false);
+        else
+            result.push_back(true);
+    }
+    return result;
 }
 
 int main() {
