@@ -260,6 +260,119 @@ vector<bool> camelMatch(vector<string>& queries, string pattern) {
     return result;
 }
 
+// palindrome pairs
+struct TrieNode{
+    char data;
+    /*this thing marks all the chars in trie as (-1)
+    ans the char that are at last node in trie to 
+    their respected index values*/
+    int stringIndex;
+    TrieNode* child[26];
+    TrieNode(char val) : data(val), stringIndex(-1) {
+        for(int i=0; i<26; ++i)
+            child[i] = 0;
+    }
+};
+class Trie {
+    TrieNode* root;
+
+    void inserting(TrieNode* node, string &word, int it, int &stringIndex) {
+        if(it == word.length()) {
+            /*here's some modification
+            we've given the index value to the last node in trie of a particular word*/
+            node->stringIndex = stringIndex;
+            return;
+        }
+        int index = word[it] - 'a';
+        if(!node->child[index])
+            node->child[index] = new TrieNode(word[it]);
+
+        inserting(node->child[index], word, it+1, stringIndex);
+    }
+
+    bool isPalindrome(string &str, int left, int right) {
+        while(left <= right) {
+            if(str[left] != str[right])
+                return false;
+            ++left, --right;
+        }
+        return true;
+    }
+
+    void searchCase2(TrieNode* node, vector<int> &v, string ans) {
+        // base case
+        if(node->stringIndex != -1) {
+            if(isPalindrome(ans, 0, ans.size()-1))
+                v.push_back(node->stringIndex);
+        }
+        for(int i=0; i<26; ++i) {
+            if(node->child[i]) {
+                // inserting the next char in trie
+                ans.push_back(i + 'a');
+                // recursion hora bhot bhayankar
+                searchCase2(node->child[i], v, ans);
+                // backtracking hori bhot bhayankar
+                ans.pop_back();
+            }
+        }
+    }
+    
+public:
+    Trie() {
+        root = new TrieNode('$');
+    }
+    
+    void insert(string &word, int &stringIndex) {
+        inserting(root, word, 0, stringIndex);
+    }
+    
+    void search(string &word, vector<int> &myPalindrome) {
+        TrieNode* curr = root;
+
+        // case 1: when [prefix] matches the word that is in trie
+        for(int i=0; i<word.size(); ++i) {
+            int index = word[i] - 'a';
+            // check if the rest of the word(that is being searched) is palindrome?
+            if(curr->stringIndex != -1) {
+                if(isPalindrome(word, i, word.size()-1))
+                    myPalindrome.push_back(curr->stringIndex);
+            }
+            if(curr->child[index])
+                curr = curr->child[index];
+            else 
+                return;  
+        }
+
+        // case 2: when the word we're searching is a [prefix] of a word that is presented in trie
+        searchCase2(curr, myPalindrome, "");
+    }
+};
+vector<vector<int>> palindromePairs(vector<string>& words) {
+    vector<vector<int>> ans;
+    Trie trie;
+
+    // reverse inserting
+    for(int i=0; i<words.size(); ++i) {
+        auto reverseWord = words[i];
+        // reversing the word before inserting it into the trie
+        reverse(reverseWord.begin(), reverseWord.end());
+        trie.insert(reverseWord, i);
+    }
+
+    // find palindromic pairs of each word
+    for(int i=0; i<words.size(); ++i) {
+        // it stores palindromic pairs as index values
+        vector<int> myPalindrome; 
+        trie.search(words[i], myPalindrome);
+        // here we insert all the possible palindromic pairs in [ans]
+        for(auto it : myPalindrome) {
+            if(it != i)
+                ans.push_back({i, it});
+        }
+    }
+    return ans;
+}
+
 int main() {
 
     int n;
@@ -300,6 +413,22 @@ int main() {
     for(auto r : result)
         cout << r << " ";
     cout << "]" << endl;
+
+    int n;
+    cout << "no. of words : ";
+    cin >> n;
+    vector<string> words(n);
+    for(int i=0; i<n; ++i)
+        cin >> words[i];
+    vector<vector<int>> result = palindromePairs(words);
+    cout << "here are all the possible palindromic pairs :-" << endl << "[ ";
+    for(auto row : result) {
+        cout << "[ ";
+        for(int col : row)
+            cout << col << " ";
+        cout << "]";
+    }
+    cout << " ]" << endl;
 
     return 0;
 }
